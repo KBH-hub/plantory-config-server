@@ -1,0 +1,20 @@
+server:
+  port: 9888
+
+spring:
+  application:
+    name: plantory-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:KBH-hub/plantory-config-repo.git
+          default-label: main
+          ignore-local-ssh-settings: true
+          strict-host-key-checking: true
+          private-key: ${GIT_SSH_PRIVATE_KEY}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
