@@ -19,7 +19,7 @@ public class PlantoryConfigServerApplication {
                 .ignoreIfMissing()
                 .load();
 
-        String b64 = dotenv.get("GIT_SSH_PRIVATE_KEY_B64");
+        String b64 = dotenv.get("GIT_SSH_PRIVATE_KEY");
         if (b64 != null) {
             // 1) 따옴표 제거 + 앞뒤 trim
             b64 = b64.trim().replace("\"", "");
@@ -38,9 +38,9 @@ public class PlantoryConfigServerApplication {
             if (!privateKey.endsWith("\n")) privateKey += "\n";
 
             // (검증용) 키 전체를 출력하지 말고 헤더s만 확인
-//            System.out.println("SSH key header: " + privateKey.lines().findFirst().orElse("(empty)"));
-//
-//            System.setProperty("GIT_SSH_PRIVATE_KEY", privateKey);
+            System.out.println("SSH key header: " + privateKey.lines().findFirst().orElse("(empty)"));
+
+            System.setProperty("GIT_SSH_PRIVATE_KEY", privateKey);
         }
 
         SpringApplication.run(PlantoryConfigServerApplication.class, args);
